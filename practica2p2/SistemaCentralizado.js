@@ -2,14 +2,21 @@
 const tarjetaSube= require('./Sube.js');
 
 const SistemaCentralizado = function () {
-    this.cargasPendientes = [];
+    this.cargas =new Carga();
     this.cargasRealizadas = [];
     this.cargarSaldo = (montoACargar,tarjetaSube)=>{
-        this.cargasPendientes.push = new Carga(cargasPendientes,idsube);
-        this.cargarTarjeta(montoACargar,tarjetaSube.obtenerIdentificador());
+        this.cargasPendientes.push = new Carga(montoACargar,idsube);
+        this.acreditarCarga(this.cargasPendientes);
 
     }
-    this.acreditarCarga = (tarjetaSube, carga) => tarjetaSube.cargarSaldo(carga);
+
+    this.acreditarCarga = (tarjetaSube, carga)  =>{
+        this.cargas.forEach((carga) => {
+            carga.acreditar(tarjetaSube);
+
+        });
+    };
+
     this.cantidadDeCargasPendiente = () => this.cargasPendientes;
 }
 
