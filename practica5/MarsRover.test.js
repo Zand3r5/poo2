@@ -81,7 +81,20 @@ describe("Mars Rover Pruebas preliminares",()=> {
             marsRover1.moverConComandos('D');
         }).toThrow("Fuera de los limites del mapa");
     });
-})
+
+});
+describe("Probando comandos anexados", ()=>{
+   test("Probando movimientos en secuencias", () => {
+       const marsRover = new MarsRover(0, 0);
+
+       marsRover.moverConComandos('DD');
+
+       expect(marsRover.obtenerCoordenada()).toEqual({ x: 2, y: 0 });
+
+
+
+   })
+});
 
 
 

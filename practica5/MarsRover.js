@@ -3,22 +3,39 @@
 const MarsRover = function(x,y){
     this.x = x;
     this.y = y;
+    this.mapa = ["N","E","S","O"];
+    this.colaComandos;
+    this.orientacion = 0;
+    this.orientacionActual = this.mapa[this.orientacion];
 
     this.obtenerCoordenada= ()=>{
         return {x:this.x, y:this.y};
     }
-    this.moverConComandos = (comando)=>{
-        this.aVertical(comando);
-        this.aHorizontal(comando);
+
+    this.moverConComandos = (comandos)=>{
+        this.colaComandos = comandos.split("");
+        this.colaComandos.forEach((comando)=>{
+            this.rotar(comando);
+            this.validarRotacion();
+            this.aVertical(comando);
+        })
     }
-    this.aHorizontal = (comando)=>{
+    this.rotar = (comando)=>{
         if (comando === 'D'){
-            this.moverX(1);
+            this.orientacion += 1;
         }if (comando === 'A'){
-            this.moverX(-1);
+            this.orientacion -= 1;
+        }
+    }
+    this.validarRotacion = ()=>{
+        if (this.orientacion > 3){
+            this.orientacion = 0;
+        }if (this.orientacion < 0){
+            this.rotacion = 3;
         }
     }
     this.aVertical = (comando)=>{
+
         if (comando === 'W'){
             this.moverY(1);
         }if (comando === 'S'){
