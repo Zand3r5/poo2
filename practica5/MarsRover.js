@@ -4,10 +4,14 @@ const MarsRover = function(x,y){
     this.x = x;
     this.y = y;
     this.mapa = ["N","E","S","O"];
-    this.colaComandos;
     this.orientacion = 0;
     this.orientacionActual = this.mapa[this.orientacion];
+    this.colaComandos;
 
+
+    this.obtenerOrientacion = ()=> {
+        return this.orientacionActual;
+    }
     this.obtenerCoordenada= ()=>{
         return {x:this.x, y:this.y};
     }
@@ -17,7 +21,7 @@ const MarsRover = function(x,y){
         this.colaComandos.forEach((comando)=>{
             this.rotar(comando);
             this.validarRotacion();
-            this.aVertical(comando);
+            this.movimientoOrientado(comando);
         })
     }
     this.rotar = (comando)=>{
@@ -26,6 +30,7 @@ const MarsRover = function(x,y){
         }if (comando === 'A'){
             this.orientacion -= 1;
         }
+        this.orientacionActual = this.mapa[this.orientacion];
     }
     this.validarRotacion = ()=>{
         if (this.orientacion > 3){
@@ -34,13 +39,47 @@ const MarsRover = function(x,y){
             this.rotacion = 3;
         }
     }
-    this.aVertical = (comando)=>{
 
-        if (comando === 'W'){
-            this.moverY(1);
-        }if (comando === 'S'){
-            this.moverY(-1);
+    this.movimientoOrientado = (comando) => {
+        if (this.orientacion === "N"){
+            this.movimientoNorte(comando);
+        }if (this.orientacion === "E"){
+            this.movimientoEste(comando);
         }
+        if (this.orientacion === "S"){
+            this.movimientoSur(comando);
+        }
+        if (this.orientacion === "O"){
+            this.movimientoOeste(comando);
+        }
+    }
+    this.movimientoNorte = (comando) => {
+        if (this.comando === "W"){
+            moverY(1);
+        }
+        moverY(-1);
+
+    }
+    this.movimientoEste = (comando) => {
+        if (this.comando === "W"){
+            moverX(1);
+        }
+        moverX(-1);
+
+    }
+    this.movimientoOeste = (comando) => {
+        if (this.comando === "W"){
+            moverX(-1);
+        }
+        moverX(1);
+
+    }
+    this.movimientoSur = (comando) => {
+        if (this.comando === "W"){
+            moverY(-1);
+        }
+        moverY(-1);
+
     }
 
     this.moverX= function(x){
